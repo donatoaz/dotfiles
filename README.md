@@ -24,3 +24,10 @@ git rebase -i
 
 Autosquashing is enabled by default on the `.gitconfig` file of this repo.
 
+### Create a new github repo from the terminal
+
+```
+curl -u "your_user_name" https://api.github.com
+curl -u "your_user_name" https://api.github.com/user/repos -d '{"name":"repo_name"}'
+```
+
