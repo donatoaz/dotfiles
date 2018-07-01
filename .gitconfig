@@ -1,0 +1,20 @@
+[user]
+	email = donatoaz@gmail.com
+	name = Donato Azevedo
+
+[alias]
+  mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
+	nthlastcheckout = "!nthlastcheckout() {\n        git reflog |\n        awk '$3==\"checkout:\" {++n}\n             n=='${1-1}' {print $NF; exit}\n             END {exit n!='${1-1}'}'\n}; nthlastcheckout \"$@\""
+
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
+[difftool]
+	prompt = false
+  # Be able to abort all diffs with `:cq` or `:cquit`
+  trustExitCode = true
+[difftool "vimdiff"]
+	cmd = "vimdiff -R $REMOTE -c ':se noreadonly' $LOCAL"
+[rebase]
+	autosquash = true
