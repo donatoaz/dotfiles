@@ -31,3 +31,10 @@ curl -u "your_user_name" https://api.github.com
 curl -u "your_user_name" https://api.github.com/user/repos -d '{"name":"repo_name"}'
 ```
 
+### Inserting in vertical block mode in vim
+
+* Enter vertical block mode with `CTRL+v`
+* Press `I` (capital "eye")
+* Type in what you want -- it will look like you are only inserting in the first line
+* When you are done, press `ESC` and `j`
+

@@ -1,25 +1,37 @@
 
-SLATE_CONFIG=$HOME/.slate
-ZSH_RC=$HOME/.zshrc
-GIT_CONFIG=$HOME/.gitconfig
+SLATE_CONFIG=.slate
+ZSH_RC=.zshrc
+GIT_CONFIG=.gitconfig
+HYPER_CONFIG=.hyper.js
 
 link_with_backup () {
-  if [ -f $1 ]; then
-    if [ -h $1 ]; then
-      echo "Unlinking $1"
-      unlink $1
+  if [ -f "$HOME/$1" ]; then
+    if [ -h "$HOME/$1" ]; then
+      echo "Unlinking $HOME/$1"
+      unlink "$HOME/$1"
     else
-      echo "Backing up $1"
-      mv $1 $1.bkp
+      # it is a full fledged file so let's back it up
+      echo "Backing up $HOME/$1"
+      mv "$HOME/$1" "$HOME/$1.bkp"
     fi
   else
-    echo "$1 file does not exist"
+    echo "$HOME/$1 file does not exist"
   fi
 
-  echo "Linking new $(basename $1) file"
-  ln -s $PWD/.slate $1
+  echo "Linking new $1 file"
+  ln -s "$PWD/$1" "$HOME/$1"
 }
 
-link_with_backup $SLATE_CONFIG
-#link_with_backup $ZSH_RC
-#link_with_backup $GIT_CONFIG
+link_with_backup_if_different () {
+  if cmp -s "$PWD/$1" "$HOME/$1"; then
+    echo "$1 is equal, skipping..."
+  else
+    echo "$1 is different, let's update it"
+    link_with_backup $1
+  fi
+}
+
+link_with_backup_if_different $SLATE_CONFIG
+link_with_backup_if_different $ZSH_RC
+link_with_backup_if_different $GIT_CONFIG
+link_with_backup_if_different $HYPER_CONFIG
