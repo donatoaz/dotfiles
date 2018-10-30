@@ -3,6 +3,7 @@ SLATE_CONFIG=.slate
 ZSH_RC=.zshrc
 GIT_CONFIG=.gitconfig
 HYPER_CONFIG=.hyper.js
+CTAGS_CONFIG=.ctags
 
 link_with_backup () {
   if [ -f "$HOME/$1" ]; then
@@ -35,3 +36,4 @@ link_with_backup_if_different $SLATE_CONFIG
 link_with_backup_if_different $ZSH_RC
 link_with_backup_if_different $GIT_CONFIG
 link_with_backup_if_different $HYPER_CONFIG
+link_with_backup_if_different $CTAGS_CONFIG

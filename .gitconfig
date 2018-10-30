@@ -18,3 +18,5 @@
 	cmd = "vimdiff -R $REMOTE -c ':se noreadonly' $LOCAL"
 [rebase]
 	autosquash = true
+[pull]
+  rebase = true
